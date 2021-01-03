@@ -1,18 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use App\Http\Controllers\HomeController;
+// use App\Http\Controllers\GolonganController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('dashboard');
+Route::get('posts', 'PostController@index');
+Route::get('posts/{post:slug}', 'PostController@show');
+
+
+// Route::get('/', [HomeController::class, 'index']); ---laravel 8 new routing
+
+Route::get('/', 'HomeController@index');
+// Route::get('golongans/{golongan:slug}', 'GolonganController@show');
+Route::prefix('golongan')->group(function () {
+    Route::get('', 'GolonganController@show')->name('golongan.show');
 });
